@@ -1,0 +1,29 @@
+{
+  "compilerOptions": {
+    "target": "ES2023",
+    "lib": ["ES2023"],
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "noImplicitOverride": true,
+    "verbatimModuleSyntax": true,
+    "isolatedModules": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    // Relative imports carry their real `.ts` extension so Node's native type
+    // stripping can resolve them without a build step.
+    "allowImportingTsExtensions": true,
+    // Nothing here is compiled by tsc: the server runs TypeScript directly,
+    // the web app is bundled by Vite, and tests run through Vitest. tsc's only
+    // job is to typecheck, so the workspace packages resolve to their source.
+    "noEmit": true,
+    "baseUrl": ".",
+    "paths": {
+      "@codenames/engine": ["./packages/engine/src/index.ts"],
+      "@codenames/protocol": ["./packages/protocol/src/index.ts"],
+      "@codenames/words": ["./packages/words/src/index.ts"]
+    }
+  }
+}

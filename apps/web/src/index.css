@@ -1,0 +1,85 @@
+@import 'tailwindcss';
+
+@theme {
+  --color-felt-950: #0a0e14;
+  --color-felt-900: #111823;
+  --color-felt-800: #1a2433;
+  --color-felt-700: #253346;
+
+  --color-agent-red: #d6424a;
+  --color-agent-red-dim: #7d2b30;
+  --color-agent-blue: #3a7bd5;
+  --color-agent-blue-dim: #26497d;
+  --color-bystander: #c8b89a;
+  --color-bystander-dim: #6b6354;
+  --color-assassin: #15181d;
+
+  --font-display: 'Georgia', 'Times New Roman', serif;
+}
+
+:root {
+  color-scheme: dark;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--color-felt-950);
+  color: #e8eaed;
+  font-family: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overscroll-behavior: none;
+}
+
+/*
+ * The flip is the single most-seen animation in the game, so it gets a real
+ * 3D transform rather than a cross-fade. `backface-visibility` keeps the word
+ * from ghosting through mid-rotation.
+ */
+.card-flip {
+  transform-style: preserve-3d;
+  transition: transform 320ms cubic-bezier(0.2, 0.8, 0.3, 1);
+}
+
+.card-flip.is-revealed {
+  transform: rotateY(180deg);
+}
+
+.card-face {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.card-face-back {
+  transform: rotateY(180deg);
+}
+
+/* A card the server has not confirmed yet: pressed, waiting, not yet flipped. */
+@keyframes pending-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.55;
+  }
+}
+
+.is-pending {
+  animation: pending-pulse 700ms ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card-flip {
+    transition-duration: 1ms;
+  }
+  .is-pending {
+    animation: none;
+    opacity: 0.6;
+  }
+}
